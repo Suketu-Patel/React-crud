@@ -1,0 +1,18 @@
+.inputContainer {
+    background-color: #173F5F;
+    width:100%;
+}
+.my-container {
+    width:100%;
+}
+.createBtn {
+    background-color: #3caea3;
+}
+label {
+    color:white;
+    font-weight: bold;
+}
+.form-wrapper {
+    margin: 0 auto;
+    width: fit-content;
+}

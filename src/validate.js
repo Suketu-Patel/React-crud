@@ -1,9 +1,16 @@
 export const VALIDATE = {
+        error:{
+            name:"",
+            email:"",
+            age:"",
+        },
         name: (name) => {
             if (/^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$/.test(name)) {
+                VALIDATE.error["name"]=""
                 return true;
             } else {
                 console.error("Name is not valid")
+                VALIDATE.error["name"]="Name is not VALID"
                 return false
             }
         },
@@ -12,20 +19,22 @@ export const VALIDATE = {
             if (data.every((item) => (item.email !== email))) {
                 // eslint-disable-next-line
                 if ((/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(email)) {
+                   VALIDATE.error["email"]=""
                     return true
                 } else {
-                    console.error("E-mail is not valid")
+                    VALIDATE.error["email"]="E-mail is not valid"
                     return false
                 }
             } else {
-                console.error("E-mail already exists")
+                VALIDATE.error["email"]="E-mail already exists"
             }
         },
         age: (age) => {
             if (age < 100 && age >= 18) {
+                VALIDATE.error["age"]=""
                 return true
             } else {
-                console.error("Invalid age input")
+                VALIDATE.error["age"]="Invalid age input"
                 return false
             }
         },
@@ -34,8 +43,18 @@ export const VALIDATE = {
             if (gender === "male" || gender === "female") {
                 return true
             } else {
-                console.error("Invalid gender input")
                 return false
             }
         },
+        inputValidator : (userInfo) => {
+            const { name, email, age, gender } = userInfo;
+            if (VALIDATE.name(name)
+                && VALIDATE.email(email.toLowerCase())
+                && VALIDATE.age(age)
+                && VALIDATE.gender(gender.toLowerCase())) {
+                return true;
+            } else {
+                return false;
+            }
+        }
 }

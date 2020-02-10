@@ -16,3 +16,38 @@ label {
     margin: 0 auto;
     width: fit-content;
 }
+span {
+    font-size: 10px;
+    color:white;
+    background-color: rgb(247, 75, 75);
+    border-radius: 3px;
+    padding: 2px;
+    font-weight: bold;
+    min-height: 10px;
+}
+.actions{
+    background-color: transparent;
+    border: none;
+}
+.actions:nth-child(1){
+    background-color:rgb(0, 140, 255);
+    color:white;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+.actions:nth-child(2){
+    background-color: red;
+    color:white;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+.modalLabel{
+    color:black;
+}
+.modal-header{
+    background-color: #173F5F;
+    color: white;
+}
+.cancelBtn{
+    background-color: tomato;
+}

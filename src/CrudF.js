@@ -1,6 +1,8 @@
 import {VALIDATE,data} from './validate'
 const inputValidator = (userInfo) => {
+    console.log(userInfo)
     const { name, email, age, gender } = userInfo;
+    console.log(name,email,age,geder)
     if (VALIDATE.name(name)
         && VALIDATE.email(email.toLowerCase())
         && VALIDATE.age(age)

@@ -1,6 +1,8 @@
 import React from "react";
-function TablePanel(props) {
-    const table = props.state.data.map((item) => {
+class TablePanel extends React.Component{
+
+    render(){
+    const table = this.props.state.data.map((item) => {
         return (
             <tr key={item.email}>
                 <td>{item.email}</td>
@@ -8,9 +10,9 @@ function TablePanel(props) {
                 <td>{item.age}</td>
                 <td>{item.gender}</td>
                 <td>
-                    <button className="actions" onClick={(e) => props.handleEdit(e, item.email)}><i className="fas fa-edit">
+                    <button className="actions" onClick={(e) => this.props.handleEdit(e, item.email)}><i className="fas fa-edit">
                     </i></button>
-                    <button className="actions" onClick={(e) => props.handleRemove(e, item.email)}><i className="fas fa-trash-alt"></i></button>
+                    <button className="actions" onClick={(e) => this.props.handleRemove(e, item.email)}><i className="fas fa-trash-alt"></i></button>
                 </td>
             </tr>)
     })
@@ -18,11 +20,11 @@ function TablePanel(props) {
             <table className="table table-striped">
                 <thead>
                     <tr>
-                        <th scope="col">e-mail</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Age</th>
-                        <th scope="col">Gender</th>
-                        <th scope="col">Actions</th>
+                        <th className="tableHeads" scope="col" onClick={()=>this.props.handleSort("email")}>e-mail <i className="fas fa-sort"></i></th>
+                        <th className="tableHeads" scope="col" onClick={()=>this.props.handleSort("name")}>Name <i className="fas fa-sort"></i></th>
+                        <th className="tableHeads" scope="col" onClick={()=>this.props.handleSort("age")}>Age <i className="fas fa-sort"></i></th>
+                        <th className="tableHeads" scope="col" onClick={()=>this.props.handleSort("gender")}>Gender <i className="fas fa-sort"></i></th>
+                        <th className="tableHeads" scope="col">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,5 +32,6 @@ function TablePanel(props) {
                 </tbody>
             </table>
     )
+}
 }
 export default TablePanel

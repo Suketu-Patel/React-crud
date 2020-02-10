@@ -4,8 +4,6 @@ import InputPanel from './InputPanel';
 import TablePanel from './tablePanel';
 import { VALIDATE } from "./validate"
 
-// import {CRUD} from "./CrudF"
-
 class Crud extends Component {
     constructor(props) {
         super(props)
@@ -14,6 +12,12 @@ class Crud extends Component {
                 {
                     name: "Suketu",
                     email: "suketupatel29@gmail.com",
+                    age: "21",
+                    gender: "Male"
+                },
+                {
+                    name: "Ashish",
+                    email: "as@gmail.com",
                     age: "21",
                     gender: "Male"
                 },
@@ -112,13 +116,23 @@ class Crud extends Component {
     }
 
     handleRemove = (e,id) =>{
-        console.log("connected")
         let updatedList = this.state.data.filter((item)=>item.email!==id)
         this.setState({
             data:updatedList
         })
     }
-
+    handleSort =(key)=>{
+        console.log("connected")
+        this.state.data.sort((a, b) => (a[key].toLowerCase() === b[key].toLowerCase()) ? 0 : (a[key].toLowerCase() > b[key].toLowerCase() ? 1 : -1))
+        this.setState(this.state)
+        console.log(this.state.data)
+    }
+    // handleSort =(key)=>{
+    //     let copy = [...this.state.data];
+    //     copy.sort((a, b) => (a[key] === b[key]) ? 0 : (a[key] > b[key] ? 1 : -1))
+    //     console.log("??",this.copy)
+    // }
+    // copy.sort((a, b) => (a[key] === b[key]) ? 0 : (a[key] > b[key] ? 1 : -1))
     render() {
         return (
             <div className="my-container">
@@ -133,6 +147,7 @@ class Crud extends Component {
                     state={this.state}
                     handleEdit={this.handleEdit}
                     handleRemove={this.handleRemove}
+                    handleSort = {this.handleSort}
                 />
             </div>
         )

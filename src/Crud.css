@@ -51,3 +51,6 @@ span {
 .cancelBtn{
     background-color: tomato;
 }
+.tableHeads{
+    cursor: pointer;
+}

@@ -59,6 +59,7 @@ class InputPanel extends Component {
                         }
                         <input type="submit" className="btn cancelBtn ml-2" value="Cancel" onClick={this.props.handleCancel}
                         />
+                        
                     </form>
                 </div>
             </div>

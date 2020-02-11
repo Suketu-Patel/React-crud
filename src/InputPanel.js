@@ -1,16 +1,20 @@
 import React, { Component } from 'react';
-
 import './Crud.css'
 import { VALIDATE } from './validate';
 class InputPanel extends Component {
     render() {
-        let ErrKeys = Object.keys(VALIDATE.error)
+
+        let ErrKeys = Object.keys(VALIDATE.error)   //getting keys of error object inside VALIDATE
+
+        /**
+         * disable or enable the Create/Update button.
+         */
         const isDisabled =
             (
                 Object
-                    .keys(this.props.state.currentInput)
-                    .some(x => this.props.state.currentInput[x] === "")
-                || ErrKeys.some((i) => VALIDATE.error[i])
+                    .keys(this.props.state.currentInput) // getting keys of currentInput object of state
+                    .some(x => this.props.state.currentInput[x] === "") //if any of the object value is "" then it will return true
+                || ErrKeys.some((i) => VALIDATE.error[i]) //if any of the error object value is not empty then it will return true
             )
 
         return (
@@ -29,7 +33,8 @@ class InputPanel extends Component {
                         </label>
                         <label className="ml-2">e-mail {VALIDATE.error["email"] && <span>{VALIDATE.error["email"]}</span>}
 
-                            <input type="text" className={(!this.props.state.isValid.email) ? "form-control border-danger" : "form-control"}
+                            <input type="text"
+                                className={(!this.props.state.isValid.email) ? "form-control border-danger" : "form-control"}
                                 placeholder="example@xyz.com"
                                 value={this.props.state.currentInput.email}
                                 onChange={(e) => this.props.validateInput(e, "email", this.props.state.data)}
@@ -37,28 +42,51 @@ class InputPanel extends Component {
 
                         </label>
                         <label className="ml-2">Age {VALIDATE.error["age"] && <span>{VALIDATE.error["age"]}</span>}
-                            <input type="number" className={(!this.props.state.isValid.age) ? "form-control border-danger" : "form-control"}
+
+                            <input type="number" 
+                                className={(!this.props.state.isValid.age) ? "form-control border-danger" : "form-control"}
                                 value={this.props.state.currentInput.age}
-                                placeholder="0" onChange={(e) => this.props.validateInput(e, "age")} />
+                                placeholder="0" 
+                                onChange={(e) => this.props.validateInput(e, "age")} 
+                            />
+
                         </label>
                         <label className="ml-2">Gender
-                            <select className="form-control" id="inputState" onBlur={(e) => this.props.validateInput(e, "gender")}>
-                                <option name="male">Male</option>
-                                <option name="female">Female</option>
+                            <select 
+                                className="form-control" 
+                                id="inputState" 
+                                onBlur={(e) => this.props.validateInput(e, "gender")}
+                            >
+                                <option name="male"> Male </option>
+                                <option name="female"> Female </option>
                             </select>
                         </label>
                         <br />
                         {
+                            //conditional rendering
                             (this.props.state.mode === "create") ?
-                                <input type="submit" className="btn createBtn" value="Create" onClick={this.props.handleOnClick}
+                                <input 
+                                    type="submit" 
+                                    className="btn createBtn" 
+                                    value="Create" 
+                                    onClick={this.props.handleOnClick}
                                     disabled={isDisabled}
                                 />
                                 :
-                                <input type="submit" className="btn createBtn" value="Update" onClick={this.props.handleEditSubmit}
+                                <input 
+                                    type="submit" 
+                                    className="btn createBtn" 
+                                    value="Update" 
+                                    onClick={this.props.handleEditSubmit}
                                     disabled={isDisabled}
                                 />
                         }
-                        <input type="submit" className="btn cancelBtn ml-2" value="Cancel" onClick={this.props.handleCancel}
+
+                        <input 
+                            type="submit" 
+                            className="btn cancelBtn ml-2" 
+                            value="Cancel" 
+                            onClick={this.props.handleCancel}
                         />
 
                     </form>

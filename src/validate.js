@@ -1,3 +1,4 @@
+//This validate function was entirely reused from the previous CRUD Js implementation with a very little addition to the code below
 export const VALIDATE = {
         error:{
             name:"",

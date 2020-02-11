@@ -36,18 +36,25 @@ class Crud extends Component {
             mode : "create"
         }
     }
+    //maps the key to the appropriate validate function and perform validation upon it.
     validateInput = (e, key, data) => {
+        //validity is used just for coloring the borders red. 
         let validity = this.state.isValid
         let currIn = this.state.currentInput;
-        currIn[key]=e.target.value;
         if (VALIDATE[key](e.target.value, data)) {
+        currIn[key]=e.target.value;
             validity[key] = true;
         } else {
             validity[key] = false;
         }
         this.setState(this.state)
     }
+    /**
+     * concats the data to the existing state.data
+     * @param e:Object event object
+     */
     handleOnClick = (e) => {
+        //prevents page from reloading.
         e.preventDefault();
         this.setState({
             data: [...this.state.data, { 
@@ -64,9 +71,12 @@ class Crud extends Component {
             }
         })  
     }
-
+    /**
+     * set the values in each input with the selected row values and change mode from create to edit.
+     * @param e:Object event object
+     * @param id:String email-id of selected row
+     */
     handleEdit = (e,id) => {
-        // console.log(id)\
         const node = this.state.data.find((item)=>item.email===id);
         this.setState({
             currentInput:{
@@ -79,7 +89,10 @@ class Crud extends Component {
         })
 
     }
-
+    /**
+     * commits the changes done on editing to the state
+     * @param e:Object event object
+     */
     handleEditSubmit = (e) => {
         e.preventDefault()
         let i = 0;
@@ -102,6 +115,10 @@ class Crud extends Component {
             mode : "create"
         })
     }
+    /**
+     * clears all the values in inputs and puts the mode back to create
+     * @param e:Object event object
+     */
     handleCancel = (e)=>{
         e.preventDefault()
         this.setState({
@@ -114,25 +131,26 @@ class Crud extends Component {
             mode : "create"
         })
     }
-
+    /**
+     * deletes the selected row
+     * @param e:Object event object
+     * @param id:String email-id of selected row
+     */
     handleRemove = (e,id) =>{
         let updatedList = this.state.data.filter((item)=>item.email!==id)
         this.setState({
             data:updatedList
         })
     }
+    /**
+     * sort the list according to the clicked heading of table
+     * @param key:String
+     */
     handleSort =(key)=>{
-        console.log("connected")
         this.state.data.sort((a, b) => (a[key].toLowerCase() === b[key].toLowerCase()) ? 0 : (a[key].toLowerCase() > b[key].toLowerCase() ? 1 : -1))
         this.setState(this.state)
-        console.log(this.state.data)
     }
-    // handleSort =(key)=>{
-    //     let copy = [...this.state.data];
-    //     copy.sort((a, b) => (a[key] === b[key]) ? 0 : (a[key] > b[key] ? 1 : -1))
-    //     console.log("??",this.copy)
-    // }
-    // copy.sort((a, b) => (a[key] === b[key]) ? 0 : (a[key] > b[key] ? 1 : -1))
+
     render() {
         return (
             <div className="my-container">

@@ -4,12 +4,13 @@ import './Crud.css'
 import { VALIDATE } from './validate';
 class InputPanel extends Component {
     render() {
+        let ErrKeys = Object.keys(VALIDATE.error)
         const isDisabled =
             (
                 Object
                     .keys(this.props.state.currentInput)
                     .some(x => this.props.state.currentInput[x] === "")
-                || VALIDATE.error.email
+                || ErrKeys.some((i) => VALIDATE.error[i])
             )
 
         return (
@@ -18,12 +19,12 @@ class InputPanel extends Component {
                     <form className="form p-5">
                         <label>Name {VALIDATE.error["name"] && <span>{VALIDATE.error["name"]}</span>}
 
-                        <input type="text"
+                            <input type="text"
                                 className={(!this.props.state.isValid.name) ? "form-control border-danger" : "form-control"}
                                 placeholder="Average Joe"
                                 value={this.props.state.currentInput.name}
                                 onChange={(e) => this.props.validateInput(e, "name")}
-                        />
+                            />
 
                         </label>
                         <label className="ml-2">e-mail {VALIDATE.error["email"] && <span>{VALIDATE.error["email"]}</span>}
@@ -48,18 +49,18 @@ class InputPanel extends Component {
                         </label>
                         <br />
                         {
-                            (this.props.state.mode==="create")?
-                            <input type="submit" className="btn createBtn" value="Create" onClick={this.props.handleOnClick}
-                            disabled={isDisabled}
-                            />
-                            :
-                            <input type="submit" className="btn createBtn" value="Update" onClick={this.props.handleEditSubmit}
-                            disabled={isDisabled}
-                            />
+                            (this.props.state.mode === "create") ?
+                                <input type="submit" className="btn createBtn" value="Create" onClick={this.props.handleOnClick}
+                                    disabled={isDisabled}
+                                />
+                                :
+                                <input type="submit" className="btn createBtn" value="Update" onClick={this.props.handleEditSubmit}
+                                    disabled={isDisabled}
+                                />
                         }
                         <input type="submit" className="btn cancelBtn ml-2" value="Cancel" onClick={this.props.handleCancel}
                         />
-                        
+
                     </form>
                 </div>
             </div>
